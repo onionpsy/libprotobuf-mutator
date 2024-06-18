@@ -19,6 +19,16 @@ include (FindProtobuf)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+set(ABSL_ENABLE_INSTALL ON)
+FetchContent_Declare(
+  absl
+  GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
+  GIT_TAG        origin/master
+  OVERRIDE_FIND_PACKAGE
+)
+FetchContent_MakeAvailable(absl)
+
 set(PROTOBUF_TARGET external.protobuf)
 set(PROTOBUF_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${PROTOBUF_TARGET})
 
