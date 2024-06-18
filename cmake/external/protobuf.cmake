@@ -16,6 +16,9 @@
 # override the rest with ExternalProject version.
 include (FindProtobuf)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(PROTOBUF_TARGET external.protobuf)
 set(PROTOBUF_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${PROTOBUF_TARGET})
 
