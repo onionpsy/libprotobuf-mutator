@@ -19,15 +19,17 @@ include (FindProtobuf)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include (ExternalProject)
 include(FetchContent)
 set(ABSL_ENABLE_INSTALL ON)
-FetchContent_Declare(
-  absl
-  GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-  GIT_TAG        origin/master
-  OVERRIDE_FIND_PACKAGE
+ExternalProject_Add(absl
+    GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
+    GIT_TAG origin/master
+    CMAKE_ARGS 
+        -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/abseil-install  # Example installation path
 )
-FetchContent_MakeAvailable(absl)
+
+set(absl_DIR ${CMAKE_BINARY_DIR}/abseil-install/lib/cmake/absl CACHE PATH "Path to Abseil installation")
 
 set(PROTOBUF_TARGET external.protobuf)
 set(PROTOBUF_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${PROTOBUF_TARGET})
@@ -181,6 +183,7 @@ ExternalProject_Add(${PROTOBUF_TARGET}
         -DCMAKE_CXX_FLAGS=${PROTOBUF_CXXFLAGS}
         -DCMAKE_CXX_STANDARD=17
         -Dprotobuf_BUILD_TESTS=OFF
+        -Dabsl_DIR=${CMAKE_BINARY_DIR}/abseil-install/lib/cmake/absl
     BUILD_BYPRODUCTS ${PROTOBUF_BUILD_BYPRODUCTS}
 )
 

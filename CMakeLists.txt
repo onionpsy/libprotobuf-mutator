@@ -20,7 +20,7 @@ enable_language(CXX)
 
 option(LIB_PROTO_MUTATOR_TESTING "Enable test building" ON)
 option(LIB_PROTO_MUTATOR_DOWNLOAD_PROTOBUF
-       "Automatically download working protobuf" OFF)
+       "Automatically download working protobuf" ON)
 option(LIB_PROTO_MUTATOR_WITH_ASAN "Enable address sanitizer" OFF)
 option(PKG_CONFIG_PATH "Directory to install pkgconfig file" "share/pkgconfig")
 set(LIB_PROTO_MUTATOR_FUZZER_LIBRARIES "" CACHE STRING "Fuzzing engine libs")
